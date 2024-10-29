@@ -24,12 +24,24 @@
                             <h4>STEP 1: Who You Are</h4>
                             <p>This information will be used to contact you about your service.</p>
                             <div class="row justify-content-between text-left">
-                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">First name<span class="text-danger"> *</span></label> <input type="text" id="fname" name="fname" placeholder="Enter your first name" onblur="validate(1)"> </div>
-                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> </div>
+                                <div class="form-group col-sm-6 flex-column d-flex"> 
+                                    <label class="form-control-label px-3">First name<span class="text-danger"> *</span></label> 
+                                    <input type="text" id="fname" name="fname" placeholder="Enter your first name" onblur="validate(1)"> 
+                                </div>
+                                <div class="form-group col-sm-6 flex-column d-flex"> 
+                                    <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> 
+                                    <input type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> 
+                                </div>
                             </div>
                             <div class="row justify-content-between text-left">
-                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Business email<span class="text-danger"> *</span></label> <input type="text" id="email" name="email" placeholder="" onblur="validate(3)"> </div>
-                                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Phone number<span class="text-danger"> *</span></label> <input type="text" id="mob" name="mob" placeholder="" onblur="validate(4)"> </div>
+                                <div class="form-group col-sm-6 flex-column d-flex"> 
+                                    <label class="form-control-label px-3"> email<span class="text-danger"> *</span></label> 
+                                    <input type="text" id="email" name="email" placeholder="email" onblur="validate(3)"> 
+                                </div>
+                                <div class="form-group col-sm-6 flex-column d-flex"> 
+                                    <label class="form-control-label px-3">Phone number<span class="text-danger"> *</span></label> 
+                                    <input type="text" id="mob" name="mob" placeholder="" onblur="validate(4)"> 
+                                </div>
                             </div>
                         </div>
 
@@ -38,6 +50,27 @@
                         <div class="step-2">
                             <h4>STEP 2: Your Home</h4>
                             <p>Where would you like the cleaning?</p>
+
+                            <div class="row justify-content-between text-left">
+                                <div class="form-group col-sm-6 flex-column d-flex"> 
+                                    <label class="form-control-label px-3">Address<span class="text-danger"> *</span></label> 
+                                    <input type="text" id="address" name="address" placeholder="Enter your first Address" onblur="validate(5)"> 
+                                </div>
+                                <div class="form-group col-sm-6 flex-column d-flex"> 
+                                    <label class="form-control-label px-3">Apt/Suite<span class="text-danger"> *</span></label> 
+                                    <input type="text" id="suite" name="suite" placeholder="" onblur="validate(6)"> 
+                                </div>
+                            </div>
+                            <div class="row justify-content-between text-left">
+                                <div class="form-group col-sm-6 flex-column d-flex"> 
+                                    <label class="form-control-label px-3">City<span class="text-danger"> *</span></label> 
+                                    <input type="text" id="city" name="city" placeholder="" onblur="validate(7)"> 
+                                </div>
+                                <div class="form-group col-sm-6 flex-column d-flex"> 
+                                    <label class="form-control-label px-3">State<span class="text-danger"> *</span></label> 
+                                    <input type="text" id="state" name="state" placeholder="" onblur="validate(8)"> 
+                                </div>
+                            </div>
                             
                         </div> 
 
@@ -48,6 +81,54 @@
                             <p>Describe your home</p>
                             <p>Please choose all the bedrooms in your home even if you do not need some bedrooms cleaned. You can call us if you only need a partial cleaning.</p>
                             <p>Any extra room, bonus room, office room, etc is considered as an additional bedroom.</p>
+
+                            <div class="row justify-content-between text-left">
+                                <div class="form-floating col-sm-6 flex-column d-flex"> 
+                                    <select id="select1" class="form-select">
+                                        <option>Studio</option>
+                                        <option>One Bedroom House</option>
+                                        <option>Two Bedroom House</option>
+                                        <option>Three Bedroom House</option>
+                                        <option>Four Bedroom House</option>
+                                    </select>
+                                    <label class="form-control-label px-3" for="select1"></label> 
+                                </div>
+                                <div class="form-group col-sm-6 flex-column d-flex"> 
+                                    <select id="select2" class="form-select">
+                                        <option>1 Full Bathrooms</option>
+                                        <option>2 Full Bathrooms</option>
+                                        <option>3 Full Bathrooms</option>
+                                        <option>4 Full Bathrooms</option>
+                                        <option>5 Full Bathrooms</option>
+                                    </select>
+                                    <label class="form-control-label px-3"></label> 
+                                </div>
+                            </div>
+                            <div class="row justify-content-between text-left">
+                                <div class="form-floating col-sm-6 flex-column d-flex"> 
+                                    <select id="select1" class="form-select">
+                                        <option>0 Half Bathrooms</option>
+                                        <option>1 Half Bathrooms</option>
+                                        <option>2 Half Bathrooms</option>
+                                        <option>3 Half Bathrooms</option>
+                                        <option>4 Half Bathrooms</option>
+                                        <option>5 Half Bathrooms</option>
+                                        <option>6 Half Bathrooms</option>
+                                        <option>7 Half Bathrooms</option>
+                                        <option>8 Half Bathrooms</option>
+                                    </select>  
+                                    <label class="form-control-label px-3"></label>                               
+                                </div>
+                                <div class="form-floating col-sm-6 flex-column d-flex"> 
+                                    <select id="select1" class="form-select">
+                                        <option>0 - 999 Sq Ft</option>
+                                        <option>1000 - 1499 Sq Ft </option>
+                                        <option>1500- 1999 Sq Ft</option>
+                                        <option>2000 - (Price may vary, please call us)</option>
+                                    </select>
+                                    <label class="form-control-label px-3" for="select1"></label> 
+                                </div>
+                            </div>
                         </div>
 
                         <hr class="step-separator">

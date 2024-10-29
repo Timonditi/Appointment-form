@@ -3,12 +3,20 @@ function validate(val) {
     v2 = document.getElementById("lname");
     v3 = document.getElementById("email");
     v4 = document.getElementById("mob");
+    v5 = document.getElementById("address");
+    v6 = document.getElementById("suite");
+    v7 = document.getElementById("city");
+    v8 = document.getElementById("state");
 
 
     flag1 = true;
     flag2 = true;
     flag3 = true;
     flag4 = true;
+    flag5 = true;
+    flag6 = true;
+    flag7 = true;
+    flag8 = true;
 
 
     if(val>=1 || val==0) {
@@ -52,9 +60,50 @@ function validate(val) {
             flag4 = true;
         }
     }
+    if(val>=5 || val==0) {
+        if(v5.value == "") {
+            v5.style.borderColor = "red";
+            flag5 = false;
+        }
+        else {
+            v5.style.borderColor = "green";
+            flag5 = true;
+        }
+    }
+    if(val>=6 || val==0) {
+        if(v6.value == "") {
+            v6.style.borderColor = "red";
+            flag6 = false;
+        }
+        else {
+            v6.style.borderColor = "green";
+            flag6 = true;
+        }
+    }
+    if(val>=7 || val==0) {
+        if(v7.value == "") {
+            v7.style.borderColor = "red";
+            flag7 = false;
+        }
+        else {
+            v7.style.borderColor = "green";
+            flag7 = true;
+        }
+    }
+    if(val>=8 || val==0) {
+        if(v8.value == "") {
+            v8.style.borderColor = "red";
+            flag8 = false;
+        }
+        else {
+            v8.style.borderColor = "green";
+            flag8 = true;
+        }
+    }
+
     
 
-    flag = flag1 && flag2 && flag3 && flag4;
+    flag = flag1 && flag2 && flag3 && flag4 && flag5 && flag6 && flag7 && flag8;
 
     return flag;
 }
