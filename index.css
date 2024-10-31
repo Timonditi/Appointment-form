@@ -4,3 +4,7 @@ body{color: #000;overflow-x: hidden;height: 100%;background-repeat: no-repeat;ba
     border-top: 2px solid #090909; /* Change color as needed */
     margin: 30px 0; /* Adjust spacing as needed */
 }
+.mbsc-ios .mbsc-form-grid .mbsc-textfield-wrapper {
+    margin: 0.75em 1em;
+}
+  
