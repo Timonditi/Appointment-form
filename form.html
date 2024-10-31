@@ -329,15 +329,11 @@
                     <p>If you can't reserve the day and time that you want, feel free to call us at +1 202-754-4020
                     and we will be happy to see if we can make scheduling arrangements for you.</p>
 
-                    <div class="container d-flex justify-content-center align-items-center">
-                        <div class="card p-2 w-16">
-                          <h2 class="text-center">Select a Date</h2>
-                          <div class="form-group">
-                            <input type="date" class="form-control" id="datepicker" onchange="displaySelectedDate()" />
-                          </div>
-                          <p class="text-center" id="selected-date"></p>
-                        </div>
-                      </div>
+                    <div class="datepicker-container">
+                        <label for="datePicker">Select a Date:</label>
+                        <input type="date" id="datePicker">
+                        <p id="selectedDate"></p>
+                    </div>
 
                         <hr class="step-separator">
 
