@@ -112,31 +112,30 @@ function validate(val) {
 //     theme: 'ios',
 //     themeVariant: 'light'
 //   });
-  // Pricing Data
-  const cleaningServiceData = {
-    serviceTypes: [
+const cleaningServiceData = {
+  serviceTypes: [
       { type: "Studio", price: 90 },
       { type: "One Bedroom House", price: 110 },
       { type: "Two Bedroom House", price: 130 },
       { type: "Three Bedroom House", price: 150 },
       { type: "Four Bedroom House", price: 170 },
-    ],
-    bathrooms: [
+  ],
+  bathrooms: [
       { count: "1 Full Bathroom", price: 25 },
       { count: "2 Full Bathrooms", price: 50 },
       { count: "3 Full Bathrooms", price: 70 },
       { count: "4 Full Bathrooms", price: 90 },
       { count: "5 Full Bathrooms", price: 110 },
-    ],
-    halfBathrooms: [
+  ],
+  halfBathrooms: [
       { count: "0 Half Bathrooms", price: 0 },
       { count: "1 Half Bathroom", price: 12 },
       { count: "2 Half Bathrooms", price: 24 },
       { count: "3 Half Bathrooms", price: 36 },
       { count: "4 Half Bathrooms", price: 48 },
       { count: "5 Half Bathrooms", price: 60 },
-    ],
-    extras: [
+  ],
+  extras: [
       { name: "I Need This Cleaning Today!", price: 45 },
       { name: "Deep Cleaning", price: 55 },
       { name: "Move In / Move Out", price: 75 },
@@ -153,79 +152,107 @@ function validate(val) {
       { name: "Sweep Garage", price: 28 },
       { name: "Ceiling Fan", price: 6 },
       { name: "Eco-Friendly Cleaning", price: 25 },
-    ],
-    squareFootage: [
+  ],
+  squareFootage: [
       { range: "0 - 999 Sq Ft", price: 0 },
       { range: "1000 - 1499 Sq Ft", price: 25 },
       { range: "1500 - 1999 Sq Ft", price: 35 },
       { range: "2000+ Sq Ft", price: 55 },
-    ],
-    frequencyDiscounts: {
+  ],
+  frequencyDiscounts: {
       "Every 4 Weeks": 0.05,
       "Every 3 Weeks": 0.07,
       "Every 2 Weeks": 0.12,
       "Every Week": 0.18,
       "One Time": 0,
-    },
-  };
-  
-  // DOM Elements
-  const bedroomSelect = document.getElementById('select1');
-  const bathroomSelect = document.getElementById('select2');
-  const addOnCards = document.querySelectorAll('.selectable-card');
-  const frequencyButtons = document.querySelectorAll('.btn-primary');
-  const totalDisplay = document.getElementById('selected-date'); // Assuming it's used to display the total for demo
-  
-  let selectedAddOns = [];
-  let frequencyDiscount = 0;
-  
-  // Toggle Add-On Selection
-  addOnCards.forEach(card => {
-    card.addEventListener('click', () => {
+  },
+};
+
+const bedroomSelect = document.getElementById('select1');
+const bathroomSelect = document.getElementById('select2');
+const halfBathroomSelect = document.getElementById('select3');
+const squareFootageSelect = document.getElementById('select4');
+const addOnCards = document.querySelectorAll('.selectable-card');
+const frequencyButtons = document.querySelectorAll('.btn-primary');
+const totalDisplay = document.getElementById('selected-date'); // Assuming it's used to display the total for demo
+
+let selectedAddOns = [];
+let frequencyDiscount = 0;
+
+// Toggle Add-On Selection
+addOnCards.forEach(card => {
+  card.addEventListener('click', () => {
       const addOnText = card.querySelector('.card-text').textContent;
       if (selectedAddOns.includes(addOnText)) {
-        selectedAddOns = selectedAddOns.filter(item => item !== addOnText);
-        card.classList.remove('selected');
+          selectedAddOns = selectedAddOns.filter(item => item !== addOnText);
+          card.classList.remove('selected');
       } else {
-        selectedAddOns.push(addOnText);
-        card.classList.add('selected');
+          selectedAddOns.push(addOnText);
+          card.classList.add('selected');
       }
       console.log('Selected Add-Ons:', selectedAddOns); // Log selected add-ons
       calculateTotal();
-    });
   });
-  
-  // Frequency Selection
-  frequencyButtons.forEach(button => {
-    button.addEventListener('click', () => {
+});
+
+// Frequency Selection
+frequencyButtons.forEach(button => {
+  button.addEventListener('click', () => {
       frequencyDiscount = cleaningServiceData.frequencyDiscounts[button.textContent.trim()] || 0;
       console.log('Selected Frequency Discount:', frequencyDiscount); // Log selected frequency discount
       calculateTotal();
-    });
   });
-  
-  // Calculate Total Price
-  function calculateTotal() {
-    const bedroom = bedroomSelect.options[bedroomSelect.selectedIndex].text.trim();
-    const bathroom = bathroomSelect.options[bathroomSelect.selectedIndex].text.trim();
-    
-    const basePrice = cleaningServiceData.serviceTypes.find(service => service.type === bedroom)?.price || 0;
-    const bathroomPrice = cleaningServiceData.bathrooms.find(bath => bath.count === bathroom)?.price || 0;
-  
-    console.log('Base Price:', basePrice); // Log base price
-    console.log('Bathroom Price:', bathroomPrice); // Log bathroom price
-  
-    const addOnTotal = selectedAddOns.reduce((total, addOn) => {
+});
+
+// Handle Half Bathroom Selection
+halfBathroomSelect.addEventListener('change', () => {
+  calculateTotal(); // Recalculate total when half bathrooms are selected
+});
+
+// Handle Square Footage Selection
+squareFootageSelect.addEventListener('change', () => {
+  calculateTotal(); // Recalculate total when square footage is selected
+});
+
+// Calculate Total Price
+function calculateTotal() {
+  const bedroom = bedroomSelect.options[bedroomSelect.selectedIndex]?.text.trim();
+  const bathroom = bathroomSelect.options[bathroomSelect.selectedIndex]?.text.trim();
+  const halfBathroom = halfBathroomSelect.options[halfBathroomSelect.selectedIndex]?.text.trim();
+  const squareFootage = squareFootageSelect.options[squareFootageSelect.selectedIndex]?.text.trim();
+
+  if (!bedroom || !bathroom) {
+      totalDisplay.textContent = 'Please select a bedroom and bathroom type.';
+      return;
+  }
+
+  const basePrice = cleaningServiceData.serviceTypes.find(service => service.type === bedroom)?.price || 0;
+  const bathroomPrice = cleaningServiceData.bathrooms.find(bath => bath.count === bathroom)?.price || 0;
+  const halfBathroomPrice = cleaningServiceData.halfBathrooms.find(halfBath => halfBath.count === halfBathroom)?.price || 0;
+  const squareFootagePrice = cleaningServiceData.squareFootage.find(size => size.range === squareFootage)?.price || 0;
+
+  console.log('Base Price:', basePrice); // Log base price
+  console.log('Bathroom Price:', bathroomPrice); // Log bathroom price
+  console.log('Half Bathroom Price:', halfBathroomPrice); // Log half bathroom price
+  console.log('Square Footage Price:', squareFootagePrice); // Log square footage price
+
+  const addOnTotal = selectedAddOns.reduce((total, addOn) => {
       const addOnData = cleaningServiceData.extras.find(extra => extra.name === addOn);
       return addOnData ? total + addOnData.price : total;
-    }, 0);
-  
-    console.log('Add-On Total:', addOnTotal); // Log add-on total
-  
-    const finalPrice = (basePrice + bathroomPrice + addOnTotal) * (1 - frequencyDiscount);
-    console.log('Final Price before discount:', basePrice + bathroomPrice + addOnTotal); // Log total before discount
-    console.log('Final Price after discount:', finalPrice); // Log final price
-  
-    totalDisplay.textContent = `Estimated Total: $${finalPrice.toFixed(2)}`;
-  }
+  }, 0);
+
+  console.log('Add-On Total:', addOnTotal); // Log add-on total
+
+  // Calculate the final price with all components
+  const totalBeforeDiscount = basePrice + bathroomPrice + halfBathroomPrice + squareFootagePrice + addOnTotal;
+  const finalPrice = totalBeforeDiscount * (1 - frequencyDiscount);
+
+  console.log('Final Price before discount:', totalBeforeDiscount); // Log total before discount
+  console.log('Final Price after discount:', finalPrice); // Log final price
+
+  totalDisplay.textContent = `Estimated Total: $${finalPrice.toFixed(2)}`;
+}
+
+
+
   
