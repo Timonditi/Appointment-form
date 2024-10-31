@@ -245,6 +245,7 @@ const cleaningServiceData = {
     document.getElementById("finalPrice").innerText = `$${finalPrice.toFixed(2)}`;
   }
   
+  
 
 
 
