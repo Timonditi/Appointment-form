@@ -108,10 +108,10 @@ function validate(val) {
     return flag;
 }
 
-mobiscroll.setOptions({
-    theme: 'ios',
-    themeVariant: 'light'
-  });
+// mobiscroll.setOptions({
+//     theme: 'ios',
+//     themeVariant: 'light'
+//   });
   // Pricing Data
   const cleaningServiceData = {
     serviceTypes: [
@@ -166,16 +166,15 @@ mobiscroll.setOptions({
       "Every 2 Weeks": 0.12,
       "Every Week": 0.18,
       "One Time": 0,
-    }
+    },
   };
-  
   
   // DOM Elements
   const bedroomSelect = document.getElementById('select1');
   const bathroomSelect = document.getElementById('select2');
   const addOnCards = document.querySelectorAll('.selectable-card');
   const frequencyButtons = document.querySelectorAll('.btn-primary');
-  const totalDisplay = document.getElementById('selected-date');  // Assuming it's used to display the total for demo
+  const totalDisplay = document.getElementById('selected-date'); // Assuming it's used to display the total for demo
   
   let selectedAddOns = [];
   let frequencyDiscount = 0;
@@ -191,20 +190,42 @@ mobiscroll.setOptions({
         selectedAddOns.push(addOnText);
         card.classList.add('selected');
       }
+      console.log('Selected Add-Ons:', selectedAddOns); // Log selected add-ons
+      calculateTotal();
+    });
+  });
+  
+  // Frequency Selection
+  frequencyButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      frequencyDiscount = cleaningServiceData.frequencyDiscounts[button.textContent.trim()] || 0;
+      console.log('Selected Frequency Discount:', frequencyDiscount); // Log selected frequency discount
       calculateTotal();
     });
   });
   
   // Calculate Total Price
   function calculateTotal() {
-    const bedroom = bedroomSelect.options[bedroomSelect.selectedIndex].text.toLowerCase().replace(/\s+/g, '');
-    const basePrice = cleaningPricing.standardCleaning[bedroom] || 0;
+    const bedroom = bedroomSelect.options[bedroomSelect.selectedIndex].text.trim();
+    const bathroom = bathroomSelect.options[bathroomSelect.selectedIndex].text.trim();
     
+    const basePrice = cleaningServiceData.serviceTypes.find(service => service.type === bedroom)?.price || 0;
+    const bathroomPrice = cleaningServiceData.bathrooms.find(bath => bath.count === bathroom)?.price || 0;
+  
+    console.log('Base Price:', basePrice); // Log base price
+    console.log('Bathroom Price:', bathroomPrice); // Log bathroom price
+  
     const addOnTotal = selectedAddOns.reduce((total, addOn) => {
-      const key = Object.keys(cleaningPricing.addOns).find(k => addOn.toLowerCase().includes(k));
-      return key ? total + cleaningPricing.addOns[key] : total;
+      const addOnData = cleaningServiceData.extras.find(extra => extra.name === addOn);
+      return addOnData ? total + addOnData.price : total;
     }, 0);
   
-    const finalPrice = (basePrice + addOnTotal) * (1 - frequencyDiscount);
+    console.log('Add-On Total:', addOnTotal); // Log add-on total
+  
+    const finalPrice = (basePrice + bathroomPrice + addOnTotal) * (1 - frequencyDiscount);
+    console.log('Final Price before discount:', basePrice + bathroomPrice + addOnTotal); // Log total before discount
+    console.log('Final Price after discount:', finalPrice); // Log final price
+  
     totalDisplay.textContent = `Estimated Total: $${finalPrice.toFixed(2)}`;
   }
+  
