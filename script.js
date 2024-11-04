@@ -166,21 +166,21 @@ const cleaningServiceData = {
         "Every Week": 0.18,
         "One Time": 0,
     },
-  };
-  
-  const bedroomSelect = document.getElementById('select1');
-  const bathroomSelect = document.getElementById('select2');
-  const halfBathroomSelect = document.getElementById('select3');
-  const squareFootageSelect = document.getElementById('select4');
-  const addOnCards = document.querySelectorAll('.selectable-card');
-  const frequencyButtons = document.querySelectorAll('.btn-primary');
-  const totalDisplay = document.getElementById('finalPrice'); // Display the final price
-  
-  let selectedAddOns = [];
-  let frequencyDiscount = 0;
-  
-  // Toggle Add-On Selection
-  addOnCards.forEach(card => {
+};
+
+const bedroomSelect = document.getElementById('select1');
+const bathroomSelect = document.getElementById('select2');
+const halfBathroomSelect = document.getElementById('select3');
+const squareFootageSelect = document.getElementById('select4');
+const addOnCards = document.querySelectorAll('.selectable-card');
+const frequencyButtons = document.querySelectorAll('.btn-primary');
+const totalDisplay = document.getElementById('finalPrice'); // Display the final price
+
+let selectedAddOns = [];
+let frequencyDiscount = 0;
+
+// Toggle Add-On Selection
+addOnCards.forEach(card => {
     card.addEventListener('click', () => {
         const addOnText = card.querySelector('.card-text').textContent;
         if (selectedAddOns.includes(addOnText)) {
@@ -192,48 +192,57 @@ const cleaningServiceData = {
         }
         updateBookingSummary();
     });
-  });
-  
-  // Frequency Selection
-  frequencyButtons.forEach(button => {
+});
+
+// Frequency Selection
+frequencyButtons.forEach(button => {
     button.addEventListener('click', () => {
+        // Remove 'selected' class from all frequency buttons
+        frequencyButtons.forEach(btn => btn.classList.remove('selected'));
+
+        // Add 'selected' class to the clicked button
+        button.classList.add('selected');
+
+        // Set frequency discount based on the button text
         frequencyDiscount = cleaningServiceData.frequencyDiscounts[button.textContent.trim()] || 0;
+
+        // Update the booking summary to reflect the new frequency discount
         updateBookingSummary();
     });
-  });
-  
-  // Handle Half Bathroom Selection
-  halfBathroomSelect.addEventListener('change', updateBookingSummary);
-  
-  // Handle Square Footage Selection
-  squareFootageSelect.addEventListener('change', updateBookingSummary);
-  
-  // Update Booking Summary Display
-  function updateBookingSummary() {
+});
+
+// Handle Half Bathroom Selection
+halfBathroomSelect.addEventListener('change', updateBookingSummary);
+
+// Handle Square Footage Selection
+squareFootageSelect.addEventListener('change', updateBookingSummary);
+
+// Update Booking Summary Display
+function updateBookingSummary() {
     const bedroom = bedroomSelect.options[bedroomSelect.selectedIndex]?.text.trim();
     const bathroom = bathroomSelect.options[bathroomSelect.selectedIndex]?.text.trim();
     const halfBathroom = halfBathroomSelect.options[halfBathroomSelect.selectedIndex]?.text.trim();
     const squareFootage = squareFootageSelect.options[squareFootageSelect.selectedIndex]?.text.trim();
-  
+
     if (!bedroom || !bathroom) {
         document.getElementById("finalPrice").innerText = 'Please select a bedroom and bathroom type.';
         return;
     }
-  
+
     // Calculate prices
     const basePrice = cleaningServiceData.serviceTypes.find(service => service.type === bedroom)?.price || 0;
     const bathroomPrice = cleaningServiceData.bathrooms.find(bath => bath.count === bathroom)?.price || 0;
     const halfBathroomPrice = cleaningServiceData.halfBathrooms.find(halfBath => halfBath.count === halfBathroom)?.price || 0;
     const squareFootagePrice = cleaningServiceData.squareFootage.find(size => size.range === squareFootage)?.price || 0;
-  
+
     const addOnTotal = selectedAddOns.reduce((total, addOn) => {
         const addOnData = cleaningServiceData.extras.find(extra => extra.name === addOn);
         return addOnData ? total + addOnData.price : total;
     }, 0);
-  
+
     const totalBeforeDiscount = basePrice + bathroomPrice + halfBathroomPrice + squareFootagePrice + addOnTotal;
     const finalPrice = totalBeforeDiscount * (1 - frequencyDiscount);
-  
+
     // Update Booking Summary Card
     document.getElementById("serviceType").innerText = bedroom;
     document.getElementById("bathroomType").innerText = bathroom;
@@ -243,7 +252,8 @@ const cleaningServiceData = {
     document.getElementById("frequencyDiscountText").innerText = `${(frequencyDiscount * 100).toFixed(0)}%`;
     document.getElementById("totalBeforeDiscount").innerText = `$${totalBeforeDiscount.toFixed(2)}`;
     document.getElementById("finalPrice").innerText = `$${finalPrice.toFixed(2)}`;
-  }
+}
+
   
   
 
