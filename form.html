@@ -396,6 +396,7 @@
                     <p><strong>Half Bathrooms:</strong> <span id="halfBathroomType">-</span></p>
                     <p><strong>Square Footage:</strong> <span id="squareFootageType">-</span></p>
                     <p><strong>Extras:</strong> <span id="extrasList">-</span></p>
+                    <p><strong>Selected Date:</strong> <span id="selectedDateText">-</span></p>
                     <p><strong>Frequency Discount:</strong> <span id="frequencyDiscountText">-</span></p>
                     <p><strong>Total Before Discount:</strong> <span id="totalBeforeDiscount">$0.00</span></p>
                     <p><strong>Final Price:</strong> <span id="finalPrice">$0.00</span></p>
@@ -409,24 +410,31 @@
       <script>
         const datePicker = document.getElementById('datePicker');
         const selectedDateElement = document.getElementById('selectedDate');
-        
+        const selectedDateText = document.getElementById('selectedDateText');
+    
         // Set minimum date to today
-        const today = new Date().toISOString().split("T")[0];
-        datePicker.min = today;
+        const today = new Date();
+        today.setHours(0, 0, 0, 0); // Clear time part for accurate comparison
+        datePicker.min = today.toISOString().split("T")[0];
     
         // Listen for changes in the date input
         datePicker.addEventListener('change', () => {
             const selectedDate = new Date(datePicker.value);
+            selectedDate.setHours(0, 0, 0, 0); // Clear time for accurate comparison
             
-            if (selectedDate < new Date()) {
+            if (selectedDate < today) {
                 selectedDateElement.textContent = "Please select a future date.";
                 selectedDateElement.style.color = "red";
+                selectedDateText.textContent = "-"; // Reset in booking summary
             } else {
-                selectedDateElement.textContent = `You selected: ${selectedDate.toDateString()}`;
+                const dateStr = selectedDate.toDateString();
+                selectedDateElement.textContent = `You selected: ${dateStr}`;
                 selectedDateElement.style.color = "black";
+                selectedDateText.textContent = dateStr; // Update in booking summary
             }
         });
     </script>
+    
       <script>
         // Function to toggle 'selected' class on click
         function toggleSelect(card) {
