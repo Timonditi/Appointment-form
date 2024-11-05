@@ -403,6 +403,27 @@
         </div>
       </div>
       <script>
+        const datePicker = document.getElementById('datePicker');
+        const selectedDateElement = document.getElementById('selectedDate');
+        
+        // Set minimum date to today
+        const today = new Date().toISOString().split("T")[0];
+        datePicker.min = today;
+    
+        // Listen for changes in the date input
+        datePicker.addEventListener('change', () => {
+            const selectedDate = new Date(datePicker.value);
+            
+            if (selectedDate < new Date()) {
+                selectedDateElement.textContent = "Please select a future date.";
+                selectedDateElement.style.color = "red";
+            } else {
+                selectedDateElement.textContent = `You selected: ${selectedDate.toDateString()}`;
+                selectedDateElement.style.color = "black";
+            }
+        });
+    </script>
+      <script>
         // Function to toggle 'selected' class on click
         function toggleSelect(card) {
           card.classList.toggle('selected');
