@@ -7,4 +7,19 @@ body{color: #000;overflow-x: hidden;height: 100%;background-repeat: no-repeat;ba
 .mbsc-ios .mbsc-form-grid .mbsc-textfield-wrapper {
     margin: 0.75em 1em;
 }
-  
+/* Styling for card hover and selected state */
+.selectable-card {
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.selectable-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.selectable-card.selected {
+    background-color: #007bff;
+    color: white;
+}
+.selectable-card.selected i {
+    color: white;
+}

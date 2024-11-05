@@ -260,7 +260,49 @@ function updateBookingSummary() {
     document.getElementById("finalPrice").innerText = `$${finalPrice.toFixed(2)}`;
 }
 
-  
+    // Function to toggle 'selected' class on click
+    function toggleSelect(card) {
+        card.classList.toggle('selected');
+    }
+
+
+const datePicker = document.getElementById('datePicker');
+    const timePicker = document.getElementById('timePicker');
+    const selectedDateTimeElement = document.getElementById('selectedDateTime');
+    const selectedDateText = document.getElementById('selectedDateText'); // For booking summary
+
+    // Set minimum date to today
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Clear time part for accurate comparison
+    datePicker.min = today.toISOString().split("T")[0];
+
+    // Function to display the selected date and time
+    function updateSelectedDateTime() {
+        const selectedDate = new Date(datePicker.value);
+        const selectedTime = timePicker.value;
+
+        selectedDate.setHours(0, 0, 0, 0); // Clear time for accurate comparison
+
+        if (selectedDate < today) {
+            selectedDateTimeElement.textContent = "Please select a future date.";
+            selectedDateTimeElement.style.color = "red";
+            selectedDateText.textContent = "-"; // Reset in booking summary
+        } else if (!selectedTime) {
+            selectedDateTimeElement.textContent = "Please select a time.";
+            selectedDateTimeElement.style.color = "red";
+            selectedDateText.textContent = "-"; // Reset in booking summary
+        } else {
+            const dateStr = selectedDate.toDateString();
+            const dateTimeStr = `${dateStr} at ${selectedTime}`;
+            selectedDateTimeElement.textContent = `You selected: ${dateTimeStr}`;
+            selectedDateTimeElement.style.color = "black";
+            selectedDateText.textContent = dateTimeStr; // Update in booking summary
+        }
+    }
+
+    // Listen for changes in the date and time inputs
+    datePicker.addEventListener('change', updateSelectedDateTime);
+    timePicker.addEventListener('change', updateSelectedDateTime);
   
 
 
