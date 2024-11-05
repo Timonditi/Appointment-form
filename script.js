@@ -211,6 +211,12 @@ frequencyButtons.forEach(button => {
     });
 });
 
+//Handle bedroom selection
+bedroomSelect.addEventListener('change', updateBookingSummary);
+
+//Handle bathroom selection
+bathroomSelect.addEventListener('change', updateBookingSummary);
+
 // Handle Half Bathroom Selection
 halfBathroomSelect.addEventListener('change', updateBookingSummary);
 
