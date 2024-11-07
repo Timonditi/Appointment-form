@@ -259,6 +259,27 @@ function updateBookingSummary() {
     document.getElementById("totalBeforeDiscount").innerText = `$${totalBeforeDiscount.toFixed(2)}`;
     document.getElementById("finalPrice").innerText = `$${finalPrice.toFixed(2)}`;
 }
+function toggleSelect(card) {
+    card.classList.toggle("selected");
+    if (card.classList.contains("selected")) {
+      // Reset count on first selection if needed
+      card.querySelector("#counter").innerText = 1;
+    }
+  }
+
+  function increment(event) {
+    event.stopPropagation();  // Prevents toggleSelect from being triggered
+    const counter = event.target.parentNode.querySelector("#counter");
+    let count = parseInt(counter.innerText);
+    counter.innerText = ++count;
+  }
+
+  function decrement(event) {
+    event.stopPropagation();  // Prevents toggleSelect from being triggered
+    const counter = event.target.parentNode.querySelector("#counter");
+    let count = parseInt(counter.innerText);
+    if (count > 1) counter.innerText = --count;
+  }
 
     // Function to toggle 'selected' class on click
     function toggleSelect(card) {
