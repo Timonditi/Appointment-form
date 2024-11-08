@@ -23,3 +23,21 @@ body{color: #000;overflow-x: hidden;height: 100%;background-repeat: no-repeat;ba
 .selectable-card.selected i {
     color: white;
 }
+.counter-controls {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  /* Show counter controls when card is selected */
+  .selectable-card.selected .counter-controls {
+    display: flex;
+  }
+
+  .counter-controls button {
+    width: 30px;
+    height: 30px;
+    font-size: 1rem;
+    line-height: 1;
+  }
