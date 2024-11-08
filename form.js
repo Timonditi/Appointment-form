@@ -300,9 +300,10 @@ function decrement(event) {
     }
 }
 
-
-
-
+ // Function to toggle 'selected' class on click
+ function toggleSelect(card) {
+    card.classList.toggle('selected');
+  }
 
 const datePicker = document.getElementById('datePicker');
     const timePicker = document.getElementById('timePicker');
