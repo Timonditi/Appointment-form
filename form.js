@@ -189,6 +189,8 @@ addOnCards.forEach(card => {
         } else {
             selectedAddOns.push(addOnText);
             card.classList.add('selected');
+            // Reset count on first selection
+            card.querySelector("#counter").innerText = 1;
         }
         updateBookingSummary();
     });
@@ -211,10 +213,10 @@ frequencyButtons.forEach(button => {
     });
 });
 
-//Handle bedroom selection
+// Handle bedroom selection
 bedroomSelect.addEventListener('change', updateBookingSummary);
 
-//Handle bathroom selection
+// Handle bathroom selection
 bathroomSelect.addEventListener('change', updateBookingSummary);
 
 // Handle Half Bathroom Selection
@@ -241,10 +243,25 @@ function updateBookingSummary() {
     const halfBathroomPrice = cleaningServiceData.halfBathrooms.find(halfBath => halfBath.count === halfBathroom)?.price || 0;
     const squareFootagePrice = cleaningServiceData.squareFootage.find(size => size.range === squareFootage)?.price || 0;
 
-    const addOnTotal = selectedAddOns.reduce((total, addOn) => {
-        const addOnData = cleaningServiceData.extras.find(extra => extra.name === addOn);
-        return addOnData ? total + addOnData.price : total;
+    // Calculate total price for selected add-ons with quantities and display name + quantity
+    const addOnTotal = Array.from(addOnCards).reduce((total, card) => {
+        if (card.classList.contains("selected")) {
+            const addOnText = card.querySelector('.card-text').textContent;
+            const quantity = parseInt(card.querySelector("#counter").innerText);
+            const addOnData = cleaningServiceData.extras.find(extra => extra.name === addOnText);
+            return addOnData ? total + (addOnData.price * quantity) : total;
+        }
+        return total;
     }, 0);
+
+    // Display add-on names and quantities in the booking summary
+    const extrasList = Array.from(addOnCards)
+        .filter(card => card.classList.contains("selected"))
+        .map(card => {
+            const addOnText = card.querySelector('.card-text').textContent;
+            const quantity = parseInt(card.querySelector("#counter").innerText);
+            return `${addOnText} (x${quantity})`;  // Displaying quantity for each selected add-on
+        }).join(", ");
 
     const totalBeforeDiscount = basePrice + bathroomPrice + halfBathroomPrice + squareFootagePrice + addOnTotal;
     const finalPrice = totalBeforeDiscount * (1 - frequencyDiscount);
@@ -254,37 +271,37 @@ function updateBookingSummary() {
     document.getElementById("bathroomType").innerText = bathroom;
     document.getElementById("halfBathroomType").innerText = halfBathroom;
     document.getElementById("squareFootageType").innerText = squareFootage;
-    document.getElementById("extrasList").innerText = selectedAddOns.length > 0 ? selectedAddOns.join(", ") : "None";
+    document.getElementById("extrasList").innerText = extrasList || "None";
     document.getElementById("frequencyDiscountText").innerText = `${(frequencyDiscount * 100).toFixed(0)}%`;
     document.getElementById("totalBeforeDiscount").innerText = `$${totalBeforeDiscount.toFixed(2)}`;
     document.getElementById("finalPrice").innerText = `$${finalPrice.toFixed(2)}`;
 }
-function toggleSelect(card) {
-    card.classList.toggle("selected");
-    if (card.classList.contains("selected")) {
-      // Reset count on first selection if needed
-      card.querySelector("#counter").innerText = 1;
-    }
-  }
 
-  function increment(event) {
+// Functions to handle increment and decrement of add-on quantities
+function increment(event) {
     event.stopPropagation();  // Prevents toggleSelect from being triggered
     const counter = event.target.parentNode.querySelector("#counter");
     let count = parseInt(counter.innerText);
     counter.innerText = ++count;
-  }
 
-  function decrement(event) {
+    // Update the booking summary after incrementing
+    updateBookingSummary();
+}
+
+function decrement(event) {
     event.stopPropagation();  // Prevents toggleSelect from being triggered
     const counter = event.target.parentNode.querySelector("#counter");
     let count = parseInt(counter.innerText);
-    if (count > 1) counter.innerText = --count;
-  }
+    if (count > 1) {
+        counter.innerText = --count;
 
-    // Function to toggle 'selected' class on click
-    function toggleSelect(card) {
-        card.classList.toggle('selected');
+        // Update the booking summary after decrementing
+        updateBookingSummary();
     }
+}
+
+
+
 
 
 const datePicker = document.getElementById('datePicker');
