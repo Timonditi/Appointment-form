@@ -5,8 +5,8 @@
 }
 .accordion{
     margin: 60px auto;
-    width: 790px;
-
+    width: 100%;
+    padding: 0 15px;
 }
 .accordion li{
     list-style: none;
@@ -70,6 +70,7 @@ input[type="checkbox"]{
     line-height: 26px;
     max-height: 0;
     overflow: hidden;
+    transition: max-height 0.5s, padding 0.8s;
 }
 .accordion input[type="checkbox"]:checked + label + .content{
     max-height: 1000px;
