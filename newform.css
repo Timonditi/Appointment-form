@@ -1,0 +1,102 @@
+.step-separator {
+    border: 0;
+    border-top: 2px solid #090909; /* Change color as needed */
+    margin: 30px 0; /* Adjust spacing as needed */
+}
+.accordion{
+    margin: 60px auto;
+    width: 790px;
+
+}
+.accordion li{
+    list-style: none;
+    margin-bottom: 5px;
+    width: 100%;
+    margin: 20px;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 6px 6px 10px -1px rgba(0, 0, 0, 0.15),
+                -6px -6px 10px -1px rgba(255, 255, 255, 0.7);
+}
+.accordion li label{
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+}
+.first-icon::before{
+    content: url(images/user_4644047.png);
+    margin-right: 10px;
+    font-size: 24px;
+    font-weight: 600;
+}
+.second-icon::before{
+    content: url(images/location_535188.png);
+    margin-right: 10px;
+    font-size: 24px;
+    font-weight: 600;
+}
+.third-icon::before{
+    content: url(images/service.png);
+    margin-right: 10px;
+    font-size: 24px;
+    font-weight: 600;
+}
+.forth-icon::before{
+    content: url(images/extras.png);
+    margin-right: 10px;
+    font-size: 24px;
+    font-weight: 600;
+}
+.fifth-icon::before{
+    content: url(images/calendar.png);
+    margin-right: 10px;
+    font-size: 24px;
+    font-weight: 600;
+}
+.sixth-icon::before{
+    content: url(images/frequency.png);
+    margin-right: 10px;
+    font-size: 24px;
+    font-weight: 600;
+}
+input[type="checkbox"]{
+    display: none;
+}
+.accordion .content{
+    padding: 0 10px;
+    line-height: 26px;
+    max-height: 0;
+    overflow: hidden;
+}
+.accordion input[type="checkbox"]:checked + label + .content{
+    max-height: 1000px;
+    padding: 10px 10px 20px;
+    
+}
+.card2 {
+    position: sticky;  
+    top: 15px;        
+    right: 10px;      
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    border-radius: 15px;
+    height: 40rem;
+    width: 25rem;      
+    transition: border-color 0.8s;
+    z-index: 1000;     
+}
+
+.card2:hover {
+    border-color: aqua;
+}
+.bookingSummaryOutput{
+    text-align: start;
+    padding: 20px;
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: 15px;
+    margin: 0 0 20px;
+}
