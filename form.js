@@ -237,11 +237,23 @@ function updateBookingSummary() {
         return;
     }
 
+    // Debugging: Log selected values
+    console.log("Selected Bedroom:", bedroom);
+    console.log("Selected Bathroom:", bathroom);
+    console.log("Selected Half Bathroom:", halfBathroom);
+    console.log("Selected Square Footage:", squareFootage);
+
     // Calculate prices
     const basePrice = cleaningServiceData.serviceTypes.find(service => service.type === bedroom)?.price || 0;
     const bathroomPrice = cleaningServiceData.bathrooms.find(bath => bath.count === bathroom)?.price || 0;
     const halfBathroomPrice = cleaningServiceData.halfBathrooms.find(halfBath => halfBath.count === halfBathroom)?.price || 0;
     const squareFootagePrice = cleaningServiceData.squareFootage.find(size => size.range === squareFootage)?.price || 0;
+
+    // Debugging: Log prices
+    console.log("Base Price:", basePrice);
+    console.log("Bathroom Price:", bathroomPrice);
+    console.log("Half Bathroom Price:", halfBathroomPrice);
+    console.log("Square Footage Price:", squareFootagePrice);
 
     // Calculate total price for selected add-ons with quantities and display name + quantity
     const addOnTotal = Array.from(addOnCards).reduce((total, card) => {
@@ -287,6 +299,7 @@ function increment(event) {
     // Update the booking summary after incrementing
     updateBookingSummary();
 }
+
 
 function decrement(event) {
     event.stopPropagation();  // Prevents toggleSelect from being triggered
