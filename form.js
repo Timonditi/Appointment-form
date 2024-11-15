@@ -189,7 +189,6 @@ addOnCards.forEach(card => {
         } else {
             selectedAddOns.push(addOnText);
             card.classList.add('selected');
-            // Reset count on first selection
             card.querySelector("#counter").innerText = 1;
         }
         updateBookingSummary();
