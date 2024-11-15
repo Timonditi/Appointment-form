@@ -142,6 +142,7 @@ const cleaningServiceData = {
         { name: "Post Construction", price: 95 },
         { name: "Inside the Fridge", price: 12 },
         { name: "Inside the Oven", price: 18 },
+        { name: "Pets", price: 30 },
         { name: "Inside Cabinets / Cupboards", price: 25 },
         { name: "Inside Windows", price: 25 },
         { name: "Clean Blinds (Per Set)", price: 6 },

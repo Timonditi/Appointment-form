@@ -77,6 +77,39 @@ input[type="checkbox"]{
     padding: 10px 10px 20px;
     
 }
+.selectable-card {
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.selectable-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.selectable-card.selected {
+    background-color: #007bff;
+    color: white;
+}
+.selectable-card.selected i {
+    color: white;
+}
+.counter-controls {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  /* Show counter controls when card is selected */
+  .selectable-card.selected .counter-controls {
+    display: flex;
+  }
+
+  .counter-controls button {
+    width: 30px;
+    height: 30px;
+    font-size: 1rem;
+    line-height: 1;
+  }
 .card2 {
     position: sticky;  
     top: 15px;        
