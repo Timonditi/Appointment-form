@@ -155,7 +155,7 @@ const cleaningServiceData = {
         { name: "Eco-Friendly Cleaning", price: 25 },
     ],
     squareFootage: [
-        { range: "0 - 999 Sq Ft", price: 0 },
+        { range: "0 - 999 Sq Ft", price: 20 },
         { range: "1000 - 1499 Sq Ft", price: 25 },
         { range: "1500 - 1999 Sq Ft", price: 35 },
         { range: "2000+ Sq Ft", price: 55 },
@@ -169,13 +169,14 @@ const cleaningServiceData = {
     },
 };
 
+
 const bedroomSelect = document.getElementById('select1');
 const bathroomSelect = document.getElementById('select2');
 const halfBathroomSelect = document.getElementById('select3');
 const squareFootageSelect = document.getElementById('select4');
 const addOnCards = document.querySelectorAll('.selectable-card');
 const frequencyButtons = document.querySelectorAll('.btn-primary');
-const totalDisplay = document.getElementById('finalPrice'); // Display the final price
+const totalDisplay = document.getElementById('finalPrice');
 
 let selectedAddOns = [];
 let frequencyDiscount = 0;
@@ -184,13 +185,17 @@ let frequencyDiscount = 0;
 addOnCards.forEach(card => {
     card.addEventListener('click', () => {
         const addOnText = card.querySelector('.card-text').textContent;
+        const counter = card.querySelector("#counter");
+
         if (selectedAddOns.includes(addOnText)) {
             selectedAddOns = selectedAddOns.filter(item => item !== addOnText);
             card.classList.remove('selected');
         } else {
             selectedAddOns.push(addOnText);
             card.classList.add('selected');
-            card.querySelector("#counter").innerText = 1;
+            if (!card.classList.contains('selected')) {
+                counter.innerText = 1;
+            }
         }
         updateBookingSummary();
     });
@@ -199,30 +204,18 @@ addOnCards.forEach(card => {
 // Frequency Selection
 frequencyButtons.forEach(button => {
     button.addEventListener('click', () => {
-        // Remove 'selected' class from all frequency buttons
         frequencyButtons.forEach(btn => btn.classList.remove('selected'));
-
-        // Add 'selected' class to the clicked button
         button.classList.add('selected');
-
-        // Set frequency discount based on the button text
+        document.getElementById('frequencyInput').value = event.target.getAttribute('data-frequency');
         frequencyDiscount = cleaningServiceData.frequencyDiscounts[button.textContent.trim()] || 0;
 
-        // Update the booking summary to reflect the new frequency discount
         updateBookingSummary();
     });
 });
 
-// Handle bedroom selection
 bedroomSelect.addEventListener('change', updateBookingSummary);
-
-// Handle bathroom selection
 bathroomSelect.addEventListener('change', updateBookingSummary);
-
-// Handle Half Bathroom Selection
 halfBathroomSelect.addEventListener('change', updateBookingSummary);
-
-// Handle Square Footage Selection
 squareFootageSelect.addEventListener('change', updateBookingSummary);
 
 // Update Booking Summary Display
@@ -232,35 +225,24 @@ function updateBookingSummary() {
     const halfBathroom = halfBathroomSelect.options[halfBathroomSelect.selectedIndex]?.text.trim();
     const squareFootage = squareFootageSelect.options[squareFootageSelect.selectedIndex]?.text.trim();
 
-    if (!bedroom || !bathroom) {
+    if (!bedroom || !bathroom || !halfBathroom || !squareFootage) {
         document.getElementById("finalPrice").innerText = 'Please select a bedroom and bathroom type.';
         return;
     }
 
-    // Debugging: Log selected values
-    console.log("Selected Bedroom:", bedroom);
-    console.log("Selected Bathroom:", bathroom);
-    console.log("Selected Half Bathroom:", halfBathroom);
-    console.log("Selected Square Footage:", squareFootage);
-
-    // Calculate prices
+    // Calculate prices, defaulting to 0 if not found to avoid NaN
     const basePrice = cleaningServiceData.serviceTypes.find(service => service.type === bedroom)?.price || 0;
     const bathroomPrice = cleaningServiceData.bathrooms.find(bath => bath.count === bathroom)?.price || 0;
     const halfBathroomPrice = cleaningServiceData.halfBathrooms.find(halfBath => halfBath.count === halfBathroom)?.price || 0;
     const squareFootagePrice = cleaningServiceData.squareFootage.find(size => size.range === squareFootage)?.price || 0;
 
-    // Debugging: Log prices
-    console.log("Base Price:", basePrice);
-    console.log("Bathroom Price:", bathroomPrice);
-    console.log("Half Bathroom Price:", halfBathroomPrice);
-    console.log("Square Footage Price:", squareFootagePrice);
-
     // Calculate total price for selected add-ons with quantities and display name + quantity
     const addOnTotal = Array.from(addOnCards).reduce((total, card) => {
         if (card.classList.contains("selected")) {
             const addOnText = card.querySelector('.card-text').textContent;
-            const quantity = parseInt(card.querySelector("#counter").innerText);
+            const quantity = parseInt(card.querySelector("#counter").innerText) || 1;
             const addOnData = cleaningServiceData.extras.find(extra => extra.name === addOnText);
+
             return addOnData ? total + (addOnData.price * quantity) : total;
         }
         return total;
@@ -271,8 +253,8 @@ function updateBookingSummary() {
         .filter(card => card.classList.contains("selected"))
         .map(card => {
             const addOnText = card.querySelector('.card-text').textContent;
-            const quantity = parseInt(card.querySelector("#counter").innerText);
-            return `${addOnText} (x${quantity})`;  // Displaying quantity for each selected add-on
+            const quantity = parseInt(card.querySelector("#counter").innerText) || 1;
+            return `${addOnText} (x${quantity})`;
         }).join(", ");
 
     const totalBeforeDiscount = basePrice + bathroomPrice + halfBathroomPrice + squareFootagePrice + addOnTotal;
@@ -287,45 +269,47 @@ function updateBookingSummary() {
     document.getElementById("frequencyDiscountText").innerText = `${(frequencyDiscount * 100).toFixed(0)}%`;
     document.getElementById("totalBeforeDiscount").innerText = `$${totalBeforeDiscount.toFixed(2)}`;
     document.getElementById("finalPrice").innerText = `$${finalPrice.toFixed(2)}`;
+    document.getElementById("extrasInput").value = JSON.stringify(selectedAddOns);
+
+    document.getElementById("finalPriceInput").value = finalPrice.toFixed(2);
+
 }
 
 // Functions to handle increment and decrement of add-on quantities
 function increment(event) {
-    event.stopPropagation();  // Prevents toggleSelect from being triggered
+    event.stopPropagation();
     const counter = event.target.parentNode.querySelector("#counter");
-    let count = parseInt(counter.innerText);
+    let count = parseInt(counter.innerText) || 1;
     counter.innerText = ++count;
 
-    // Update the booking summary after incrementing
     updateBookingSummary();
 }
 
-
 function decrement(event) {
-    event.stopPropagation();  // Prevents toggleSelect from being triggered
+    event.stopPropagation();
     const counter = event.target.parentNode.querySelector("#counter");
-    let count = parseInt(counter.innerText);
+    let count = parseInt(counter.innerText) || 1;
     if (count > 1) {
         counter.innerText = --count;
-
-        // Update the booking summary after decrementing
         updateBookingSummary();
     }
 }
+
 
  // Function to toggle 'selected' class on click
  function toggleSelect(card) {
     card.classList.toggle('selected');
   }
 
+
 const datePicker = document.getElementById('datePicker');
     const timePicker = document.getElementById('timePicker');
     const selectedDateTimeElement = document.getElementById('selectedDateTime');
-    const selectedDateText = document.getElementById('selectedDateText'); // For booking summary
+    const selectedDateText = document.getElementById('selectedDateText');
 
     // Set minimum date to today
     const today = new Date();
-    today.setHours(0, 0, 0, 0); // Clear time part for accurate comparison
+    today.setHours(0, 0, 0, 0); 
     datePicker.min = today.toISOString().split("T")[0];
 
     // Function to display the selected date and time
@@ -333,22 +317,22 @@ const datePicker = document.getElementById('datePicker');
         const selectedDate = new Date(datePicker.value);
         const selectedTime = timePicker.value;
 
-        selectedDate.setHours(0, 0, 0, 0); // Clear time for accurate comparison
+        selectedDate.setHours(0, 0, 0, 0); 
 
         if (selectedDate < today) {
             selectedDateTimeElement.textContent = "Please select a future date.";
             selectedDateTimeElement.style.color = "red";
-            selectedDateText.textContent = "-"; // Reset in booking summary
+            selectedDateText.textContent = "-"; 
         } else if (!selectedTime) {
             selectedDateTimeElement.textContent = "Please select a time.";
             selectedDateTimeElement.style.color = "red";
-            selectedDateText.textContent = "-"; // Reset in booking summary
+            selectedDateText.textContent = "-";
         } else {
             const dateStr = selectedDate.toDateString();
             const dateTimeStr = `${dateStr} at ${selectedTime}`;
             selectedDateTimeElement.textContent = `You selected: ${dateTimeStr}`;
             selectedDateTimeElement.style.color = "black";
-            selectedDateText.textContent = dateTimeStr; // Update in booking summary
+            selectedDateText.textContent = dateTimeStr;
         }
     }
 
