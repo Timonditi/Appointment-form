@@ -16,7 +16,8 @@
                 <div class="col-lg-8 mb-4">
                     <div class="card shadow border-0">
                         <div class="card-body" style="padding: 1.5rem;">
-                            <h5 class="card-title mb-4">Booking Form</h5>
+                            <h5 class="card-title text-center mb-4">PRICING AND BOOKING</h5>
+                            <h6 class="text-center mb-4">Complete your booking.</h6>
                             <form action="">
                                 <ul class="accordion list-unstyled">
                                     <!-- Contact Information Section -->
@@ -423,6 +424,20 @@
                                         </div>
                                     </li>
                                 </ul>
+                                <div>
+                                    <p>By clicking the Book Now button you are agreeing to our Terms of Service. All prices are estimates only based on the information you provided.</p>
+                                    <p>Satisfaction Guarantee: We offer a free re-cleaning to any customer who is not fully satisfied with their cleaning. Unfortunately, we can not provide a refund after a cleaning is completed. 
+                                     We must be contacted within 48 hours after the cleaning.
+                                    </p>
+                                    <p>Cancellation Policy: A $40 cancellation fee applies to all customers. For same day cancellations, the fee is $80.
+                                    </p>
+        
+                                    <input type="hidden" id="frequencyInput" name="frequency" value="One Time">
+                                    <input type="hidden" id="extrasInput" name="extras" value='[]'>
+                                    <input type="hidden" name="finalPrice" id="finalPriceInput" value="0">
+                                    <button class="btn btn-primary" id="bookNowButton" type="button">Book Now</button>
+        
+                                </div>
                             </form>
                         </div>
                     </div>
