@@ -4,7 +4,8 @@
     margin: 30px 0; /* Adjust spacing as needed */
 }
 .accordion{
-    margin: 60px auto;
+    margin: 30px auto;
+    margin-right: 40px;
     width: 100%;
     padding: 0 15px;
 }

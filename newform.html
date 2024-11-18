@@ -10,7 +10,7 @@
 </head>
 <body>
     <section id="booknow">
-        <div class="container my-5">
+        <div class="d-flex flex-container my-5">
             <div class="row">
                 <!-- Form Section -->
                 <div class="col-lg-8 mb-4">
@@ -23,7 +23,7 @@
                                     <!-- Contact Information Section -->
                                     <li class="mb-3">
                                         <input type="checkbox" name="accordion" id="first" checked>
-                                        <label class="first-icon h6" for="first">Contact Information</label>
+                                        <label class="first-icon" for="first">Contact Information</label>
                                         <div class="content">
                                             <div class="row">
                                                 <div class="form-group col-sm-6 mb-3">
@@ -50,7 +50,7 @@
                                     <!-- Address Section -->
                                     <li class="mb-3">
                                         <input type="checkbox" name="accordion" id="second">
-                                        <label class="second-icon h6" for="second">Address</label>
+                                        <label class="second-icon" for="second">Address</label>
                                         <div class="content">
                                             <div class="row">
                                                 <div class="form-group col-sm-6 mb-3">
@@ -134,260 +134,228 @@
                                         <input type="checkbox" name="accordion" id="forth">
                                         <label class="forth-icon h6" for="forth">Extras</label>
                                         <div class="content">
-                                            <div class="row">
-                                                <!-- Cards with selectable feature -->
-                                                <div class="col-md-3 col-sm-6" style="margin-bottom: 0;">
-                                                    <div class="card text-center selectable-card" style="width: 90px; height: 90px; padding: 0.5rem;" onclick="toggleSelect(this)">
-                                                        <div class="card-body" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0;">
-                                                          <img src="images/cleaning.png" style="width: 50px; height: auto; object-fit: contain;" alt="icon description" class="card-image">
-                                                          <span class="card-text" style="display: none;">I Need This Cleaning Today!</span>
-                                                          <span id="counter"></span>
-                                                        </div>
-                                                    </div>
-                                                    <div>
-                                                      <p class="item-name text-wrap fs-7 fst-italic mt-1" style="width: 8rem; margin-top: 22px;">I Need This Cleaning Today!</p>
-                                                    </div>
-                                                </div>                         
-                                                    
-                                                <div class="col-md-3 col-sm-6 my-1" style="margin-bottom: 0;">
-                                                  <div class="card text-center selectable-card" style="width: 90px; height: 90px; padding: 0.5rem;" onclick="toggleSelect(this)" style="padding: 0.5rem;">
-                                                    <div class="card-body" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0;">
-                                                        <img src="images/deepcleaning.png" style=" width: 50px; height: auto; object-fit: contain;" alt="icon description" class="card-image">
-                                                        <span class="card-text" style="display: none;">Deep Cleaning</span>
-                                                        <span id="counter"></span>
-                                                    </div>
-                                                  </div>
-                                                  <div>
-                                                    <p class="text-wrap fs-7 fst-italic mt-1" style="width: 8rem; margin-top: 22px;">Deep Cleaning</p>
+                                          <div class="row gx-2 gy-3">
+                                            <div class="col-4 col-md-3">
+                                              <div class="card text-center selectable-card p-2" onclick="toggleSelect(this)">
+                                                <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                                                  <img src="images/cleaning.png" class="card-image" alt="icon description">
+                                                  <span class="card-text d-none">I Need This Cleaning Today!</span>
+                                                  <span id="counter"></span>
                                                 </div>
-                                                </div>
-                                                
-                                                <div class="col-md-3 col-sm-6 my-1" style="margin-bottom: 0;">
-                                                  <div class="card text-center selectable-card" style="width: 90px; height: 90px; padding: 0.5rem;" onclick="toggleSelect(this)" style="padding: 0.5rem;">
-                                                    <div class="card-body" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0;">
-                                                      <img src="images/moveinmoveout.png" style=" width: 50px; height: auto; object-fit: contain;" alt="icon description" class="card-image">
-                                                      <span class="card-text" style="display: none;">Move In / Move Out</span>
-                                                      <span id="counter"></span>
-                                                    </div>
-                                                  </div>
-                                                  <div>
-                                                    <p class="text-wrap fs-7 fst-italic mt-1" style="width: 8rem; margin-top: 22px;">Move in/Move Out</p>
-                                                </div>
-                                                </div>
-                                                
-                                                <div class="col-md-3 col-sm-6 my-1" style="margin-bottom: 0;">
-                                                  <div class="card text-center selectable-card" style="width: 90px; height: 90px; padding: 0.5rem;" onclick="toggleSelect(this)" style="padding: 0.5rem;">
-                                                    <div class="card-body" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0;">
-                                                      <img src="images/construction.png" style=" width: 50px; height: auto; object-fit: contain;" alt="icon description" class="card-image">
-                                                      <span class="card-text" style="display: none;">Post Construction</span>
-                                                      <span id="counter"></span>
-                                                    </div>
-                                                  </div>
-                                                  <div>
-                                                    <p class="text-wrap fs-7 fst-italic mt-1" style="width: 8rem; margin-top: 22px;">Post Construction</p>
-                                                </div>
-                                                </div>
-                                                
-                                                <div class="col-md-3 col-sm-6 my-1" style="margin-bottom: 0;">
-                                                  <div class="card text-center selectable-card" style="width: 90px; height: 90px; padding: 0.5rem;" onclick="toggleSelect(this)" style="padding: 0.5rem;">
-                                                    <div class="card-body" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0;">
-                                                      <img src="images/fridge.png" style=" width: 50px; height: auto; object-fit: contain;" alt="icon description" class="card-image">
-                                                      <span class="card-text" style="display: none;">Inside the Fridge</span>
-                                                      <span id="counter"></span>
-                                                    </div>
-                                                  </div>
-                                                  <div>
-                                                    <p class="text-wrap fs-7 fst-italic mt-1" style="width: 8rem; margin-top: 22px;">Inside the Fridge</p>
-                                                </div>
-                                                </div>
-                                                
-                                                <div class="col-md-3 col-sm-6 my-1" style="margin-bottom: 0;">
-                                                  <div class="card text-center selectable-card" style="width: 90px; height: 90px; padding: 0.5rem;" onclick="toggleSelect(this)" style="padding: 0.5rem;">
-                                                    <div class="card-body" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0;">
-                                                      <img src="images/oven.png" style=" width: 50px; height: auto; object-fit: contain;" alt="icon description" class="card-image">
-                                                      <span class="card-text" style="display: none;">Inside the Oven</span>
-                                                      <span id="counter"></span>
-                                                    </div>
-                                                  </div>
-                                                  <div>
-                                                    <p class="text-wrap fs-7 fst-italic mt-1" style="width: 8rem; margin-top: 22px;">Inside the oven</p>
-                                                </div>
-                                                </div>
-                                                
-                                                <div class="col-md-3 col-sm-6 my-1" style="margin-bottom: 0;">
-                                                  <div class="card text-center selectable-card" style="width: 90px; height: 90px; padding: 0.5rem;" onclick="toggleSelect(this)" style="padding: 0.5rem;">
-                                                    <div class="card-body" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0;">
-                                                      <img src="images/pets.png" style=" width: 50px; height: auto; object-fit: contain;" alt="icon description" class="card-image">              
-                                                      <span class="card-text" style="display: none;">Pets</span>
-                                                      <span id="counter"></span>
-                                                    </div>
-                                                  </div>
-                                                  <div>
-                                                    <p class="text-wrap fs-7 fst-italic mt-1" style="width: 8rem; margin-top: 22px;">Pets</p>
-                                                </div>
-                                                </div>
-                                                
-                                                <div class="col-md-3 col-sm-6 my-1" style="margin-bottom: 0;">
-                                                  <div class="card text-center selectable-card" style="width: 90px; height: 90px; padding: 0.5rem;" onclick="toggleSelect(this)">
-                                                      <div class="card-body" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0;">
-                                                        <img src="images/cabinates.png" style="width: 50px; height: auto; object-fit: contain;" alt="icon description" class="card-image">
-                                                        <span id="counter"></span>
-                                                        <span class="card-text" style="display: none;">Inside Cabinets / Cupboards</span>
-                                                      </div>
-                                                  </div>
-                                                  <div>
-                                                      <p class="text-wrap fs-7 fst-italic mt-1" style="width: 8rem; margin-top: 22px;">Inside Cabinets/Cupboards</p>
-                                                  </div>
-                                              </div>                       
-                                                
-                                                <div class="col-md-3 col-sm-6 my-1" style="margin-bottom: 0;">
-                                                  <div class="card text-center selectable-card" style="width: 90px; height: 90px; padding: 0.5rem;" onclick="toggleSelect(this)" style="padding: 0.5rem;">
-                                                    <div class="card-body" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0;">
-                                                      <img src="images/windows.png" style=" width: 50px; height: auto; object-fit: contain;" alt="icon description" class="card-image">
-                                                      <span class="card-text" style="display: none;">Inside Windows</span>
-                                                      <span id="counter"></span>
-                                                    </div>
-                                                  </div>
-                                                  <div>
-                                                    <p class="text-wrap fs-7 fst-italic mt-1" style="width: 8rem; margin-top: 22px;">Inside Windows</p>
-                                                </div>
-                                                </div>
-                                                
-                                                <div class="col-md-3 col-sm-6 my-1" style="margin-bottom: 0;">
-                                                  <div class="card text-center selectable-card" style="width: 90px; height: 90px; padding: 0.5rem;" onclick="toggleSelect(this)" style="padding: 0.5rem;">
-                                                    <div class="card-body" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0;">
-                                                      <img src="images/curtain.png" style=" width: 50px; height: auto; object-fit: contain;" alt="icon description" class="card-image">
-                                                      <span class="card-text" style="display: none;">Clean Blinds (Per Set)</span>
-                      
-                                                      <div class="counter-controls">
-                                                        <button onclick="decrement(event)" class="btn btn-sm btn-outline-secondary" style="background-color: black;">-</button>
-                                                        <span id="counter" style="font-size: 1.5rem; margin: 0 10px; color: black; font-weight: bold;">1</span>
-                                                        <button onclick="increment(event)" class="btn btn-sm btn-outline-secondary" style="background-color: black;">+</button>
-                                                      </div>
-                                                    </div>
-                                                  </div>
-                                                  <div>
-                                                    <p class="text-wrap fs-7 fst-italic mt-1" style="width: 8rem; margin-top: 22px;">Clean Blinds (Per Set)</p>
-                                                </div>
-                                                </div>
-                                                
-                                                <div class="col-md-3 col-sm-6 my-1" style="margin-bottom: 0;">
-                                                  <div class="card text-center selectable-card" style="width: 90px; height: 90px; padding: 0.5rem;" onclick="toggleSelect(this)" style="padding: 0.5rem;">
-                                                    <div class="card-body" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0;">
-                                                      <img src="images/laundry.png" style=" width: 50px; height: auto; object-fit: contain;" alt="icon description" class="card-image">
-                                                      <span class="card-text" style="display: none;">Laundry (Per Load)</span>
-                      
-                                                      <div class="counter-controls">
-                                                        <button onclick="decrement(event)" class="btn btn-sm btn-outline-secondary" style="background-color: black;">-</button>
-                                                        <span id="counter" style="font-size: 1.5rem; margin: 0 10px; color: black; font-weight: bold;">1</span>
-                                                        <button onclick="increment(event)" class="btn btn-sm btn-outline-secondary" style="background-color: black;">+</button>
-                                                      </div>
-                                                    </div>
-                                                  </div>
-                                                  <div>
-                                                    <p class="text-wrap fs-7 fst-italic mt-1" style="width: 8rem; margin-top: 22px;">Loundry (Per Load)</p>
-                                                </div>
-                                                </div>
-                                                
-                                                <div class="col-md-3 col-sm-6 my-1" style="margin-bottom: 0;">
-                                                  <div class="card text-center selectable-card" style="width: 90px; height: 90px; padding: 0.5rem;" onclick="toggleSelect(this)" style="padding: 0.5rem;">
-                                                    <div class="card-body" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0;">
-                                                      <img src="images/dishes.png" style=" width: 50px; height: auto; object-fit: contain;" alt="icon description" class="card-image">
-                                                      <span class="card-text" style="display: none;">Clean Dishes (1 Sinkful)</span>
-                      
-                                                      <div class="counter-controls">
-                                                        <button onclick="decrement(event)" class="btn btn-sm btn-outline-secondary" style="background-color: black;">-</button>
-                                                        <span id="counter" style="font-size: 1.5rem; margin: 0 10px; color: black; font-weight: bold;">1</span>
-                                                        <button onclick="increment(event)" class="btn btn-sm btn-outline-secondary" style="background-color: black;">+</button>
-                                                      </div>
-                                                    </div>
-                                                  </div>
-                                                  <div>
-                                                    <p class="text-wrap fs-7 fst-italic mt-1" style="width: 8rem; margin-top: 22px;">Clean Dishes (1 Sinkful)</p>
-                                                </div>
-                                                </div>
-                                                
-                                                <div class="col-md-3 col-sm-6 my-1" style="margin-bottom: 0;">
-                                                  <div class="card text-center selectable-card" style="width: 90px; height: 90px; padding: 0.5rem;" onclick="toggleSelect(this)" style="padding: 0.5rem; position: relative;">
-                                                    <div class="card-body" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0;">
-                                                      <img src="images/balcony.png" style=" width: 50px; height: auto; object-fit: contain;" alt="icon description" class="card-image">
-                                                      <span class="card-text" style="display: none;">Balcony / Patio</span>
-                      
-                                                      <div class="counter-controls">
-                                                        <button onclick="decrement(event)" class="btn btn-sm btn-outline-secondary" style="background-color: black;">-</button>
-                                                        <span id="counter" style="font-size: 1.5rem; margin: 0 10px; color: black; font-weight: bold;">1</span>
-                                                        <button onclick="increment(event)" class="btn btn-sm btn-outline-secondary" style="background-color: black;">+</button>
-                                                      </div>
-                                                    </div>
-                                                  </div>
-                                                  <div>
-                                                    <p class="text-wrap fs-7 fst-italic mt-1" style="width: 8rem; margin-top: 22px;">Balcony / Patio</p>
-                                                </div>
-                                                </div>
-                                                
-                                                <div class="col-md-3 col-sm-6 my-1" style="margin-bottom: 0;">
-                                                  <div class="card text-center selectable-card" style="width: 90px; height: 90px; padding: 0.5rem;" onclick="toggleSelect(this)" style="padding: 0.5rem;">
-                                                    <div class="card-body" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0;">
-                                                      <img src="images/organizing.png" style=" width: 50px; height: auto; object-fit: contain;" alt="icon description" class="card-image">
-                                                      <span class="card-text" style="display: none;">30 Minutes of Organizing</span>
-                      
-                                                      <div class="counter-controls">
-                                                        <button onclick="decrement(event)" class="btn btn-sm btn-outline-secondary" style="background-color: black;">-</button>
-                                                        <span id="counter" style="font-size: 1.5rem; margin: 0 10px; color: black; font-weight: bold;">1</span>
-                                                        <button onclick="increment(event)" class="btn btn-sm btn-outline-secondary" style="background-color: black;">+</button>
-                                                      </div>
-                                                    </div>
-                                                  </div>
-                                                  <div>
-                                                    <p class="text-wrap fs-7 fst-italic mt-1" style="width: 8rem; margin-top: 22px;">30 Minutes of Organizing</p>
-                                                </div>
-                                                </div>
-                                                
-                                                <div class="col-md-3 col-sm-6 my-1" style="margin-bottom: 0;">
-                                                  <div class="card text-center selectable-card" style="width: 90px; height: 90px; padding: 0.5rem;" onclick="toggleSelect(this)" style="padding: 0.5rem;">
-                                                    <div class="card-body" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0;">
-                                                      <img src="images/sweep.png" style=" width: 50px; height: auto; object-fit: contain;" alt="icon description" class="card-image">
-                                                      <span class="card-text" style="display: none;">Sweep Garage</span>
-                                                      <span id="counter"></span>
-                                                    </div>
-                                                  </div>
-                                                  <div>
-                                                    <p class="text-wrap fs-7 fst-italic mt-1" style="width: 8rem; margin-top: 22px;">Sweep Garage</p>
-                                                </div>
-                                                </div>
-                                                
-                                                <div class="col-md-3 col-sm-6 my-1" style="margin-bottom: 0;">
-                                                  <div class="card text-center selectable-card" style="width: 90px; height: 90px; padding: 0.5rem;" onclick="toggleSelect(this)" style="padding: 0.5rem;">
-                                                    <div class="card-body" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0;">
-                                                      <img src="images/fan.png" style=" width: 50px; height: auto; object-fit: contain;" alt="icon description" class="card-image">              
-                                                      <span class="card-text" style="display: none;">Ceiling Fan</span>
-                      
-                                                      <div class="counter-controls">
-                                                        <button onclick="decrement(event)" class="btn btn-sm btn-outline-secondary" style="background-color: black;">-</button>
-                                                        <span id="counter" style="font-size: 1.5rem; margin: 0 10px; color: black; font-weight: bold;">1</span>
-                                                        <button onclick="increment(event)" class="btn btn-sm btn-outline-secondary" style="background-color: black;">+</button>
-                                                      </div>
-                                                    </div>
-                                                  </div>
-                                                  <div>
-                                                    <p class="text-wrap fs-7 fst-italic mt-1" style="width: 8rem; margin-top: 22px;">Ceiling Fan</p>
-                                                </div>
-                                                </div>
-                                                
-                                                <div class="col-md-3 col-sm-6 my-1" style="margin-bottom: 0;">
-                                                  <div class="card text-center selectable-card" style="width: 90px; height: 90px; padding: 0.5rem;" onclick="toggleSelect(this)" style="padding: 0.5rem;">
-                                                    <div class="card-body" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0;">
-                                                      <img src="images/eco-friendly.png" style=" width: 50px; height: auto; object-fit: contain;" alt="icon description" class="card-image">
-                                                      <span class="card-text" style="display: none;">Eco-Friendly Cleaning</span>
-                                                      <span id="counter"></span>
-                                                    </div>
-                                                  </div>
-                                                  <div>
-                                                    <p class="text-wrap fs-7 fst-italic mt-1" style="width: 8rem; margin-top: 22px;">Eco-Friendly Cleaning</p>
-                                                </div>
-                                                </div>      
-                                            
                                               </div>
+                                              <p class="item-name text-wrap text-center fs-7 fst-italic mt-2">I Need This Cleaning Today!</p>
+                                            </div>
+                                          
+                                            <div class="col-4 col-md-3">
+                                              <div class="card text-center selectable-card p-2" onclick="toggleSelect(this)">
+                                                <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                                                  <img src="images/deepcleaning.png" class="card-image" alt="icon description">
+                                                  <span class="card-text d-none">Deep Cleaning</span>
+                                                  <span id="counter"></span>
+                                                </div>
+                                              </div>
+                                              <p class="item-name text-wrap text-center fs-7 fst-italic mt-2">Deep Cleaning</p>
+                                            </div>
+                                          
+                                            <div class="col-4 col-md-3">
+                                              <div class="card text-center selectable-card p-2" onclick="toggleSelect(this)">
+                                                <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                                                  <img src="images/moveinmoveout.png" class="card-image" alt="icon description">
+                                                  <span class="card-text d-none">Move In / Move Out</span>
+                                                  <span id="counter"></span>
+                                                </div>
+                                              </div>
+                                              <p class="item-name text-wrap text-center fs-7 fst-italic mt-2">Move in/Move Out</p>
+                                            </div>
+                                          </div>                                          
+
+                                          <div class="row gx-2 gy-3">
+                                            <div class="col-4 col-md-3">
+                                              <div class="card text-center selectable-card p-2" onclick="toggleSelect(this)">
+                                                <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                                                  <img src="images/construction.png" class="card-image" alt="Post Construction">
+                                                  <span class="card-text d-none">Post Construction</span>
+                                                  <span id="counter"></span>
+                                                </div>
+                                              </div>
+                                              <p class="text-wrap text-center fs-7 fst-italic mt-2">Post Construction</p>
+                                            </div>
+                                          
+                                            <div class="col-4 col-md-3">
+                                              <div class="card text-center selectable-card p-2" onclick="toggleSelect(this)">
+                                                <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                                                  <img src="images/fridge.png" class="card-image" alt="Inside the Fridge">
+                                                  <span class="card-text d-none">Inside the Fridge</span>
+                                                  <span id="counter"></span>
+                                                </div>
+                                              </div>
+                                              <p class="text-wrap text-center fs-7 fst-italic mt-2">Inside the Fridge</p>
+                                            </div>
+                                          
+                                            <div class="col-4 col-md-3">
+                                              <div class="card text-center selectable-card p-2" onclick="toggleSelect(this)">
+                                                <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                                                  <img src="images/oven.png" class="card-image" alt="Inside the Oven">
+                                                  <span class="card-text d-none">Inside the Oven</span>
+                                                  <span id="counter"></span>
+                                                </div>
+                                              </div>
+                                              <p class="text-wrap text-center fs-7 fst-italic mt-2">Inside the Oven</p>
+                                            </div>
+                                          </div>
+                                          
+
+                                          <div class="row gx-2 gy-3">
+                                            <div class="col-4 col-md-3">
+                                              <div class="card text-center selectable-card p-2" onclick="toggleSelect(this)">
+                                                <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                                                  <img src="images/pets.png" class="card-image" alt="Pets">
+                                                  <span class="card-text d-none">Pets</span>
+                                                  <span id="counter"></span>
+                                                </div>
+                                              </div>
+                                              <p class="text-wrap text-center fs-7 fst-italic mt-2">Pets</p>
+                                            </div>
+                                          
+                                            <div class="col-4 col-md-3">
+                                              <div class="card text-center selectable-card p-2" onclick="toggleSelect(this)">
+                                                <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                                                  <img src="images/cabinates.png" class="card-image" alt="Inside Cabinets / Cupboards">
+                                                  <span class="card-text d-none">Inside Cabinets / Cupboards</span>
+                                                  <span id="counter"></span>
+                                                </div>
+                                              </div>
+                                              <p class="text-wrap text-center fs-7 fst-italic mt-2">Inside Cabinets/Cupboards</p>
+                                            </div>
+                                          
+                                            <div class="col-4 col-md-3">
+                                              <div class="card text-center selectable-card p-2" onclick="toggleSelect(this)">
+                                                <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                                                  <img src="images/windows.png" class="card-image" alt="Inside Windows">
+                                                  <span class="card-text d-none">Inside Windows</span>
+                                                  <span id="counter"></span>
+                                                </div>
+                                              </div>
+                                              <p class="text-wrap text-center fs-7 fst-italic mt-2">Inside Windows</p>
+                                            </div>
+                                          </div>
+                                          
+
+                                          <div class="row gx-2 gy-3">
+                                            <div class="col-4 col-md-3">
+                                              <div class="card text-center selectable-card p-2" onclick="toggleSelect(this)">
+                                                <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                                                  <img src="images/curtain.png" class="card-image" alt="Clean Blinds (Per Set)">
+                                                  <span class="card-text d-none">Clean Blinds (Per Set)</span>
+                                                  <div class="counter-controls mt-2">
+                                                    <button onclick="decrement(event)" class="btn btn-sm btn-outline-secondary text-white">-</button>
+                                                    <span id="counter" class="mx-2 fs-5 fw-bold text-dark">1</span>
+                                                    <button onclick="increment(event)" class="btn btn-sm btn-outline-secondary text-white">+</button>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <p class="text-wrap text-center fs-7 fst-italic mt-2">Clean Blinds (Per Set)</p>
+                                            </div>
+                                          
+                                            <div class="col-4 col-md-3">
+                                              <div class="card text-center selectable-card p-2" onclick="toggleSelect(this)">
+                                                <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                                                  <img src="images/laundry.png" class="card-image" alt="Laundry (Per Load)">
+                                                  <span class="card-text d-none">Laundry (Per Load)</span>
+                                                  <div class="counter-controls mt-2">
+                                                    <button onclick="decrement(event)" class="btn btn-sm btn-outline-secondary text-white">-</button>
+                                                    <span id="counter" class="mx-2 fs-5 fw-bold text-dark">1</span>
+                                                    <button onclick="increment(event)" class="btn btn-sm btn-outline-secondary text-white">+</button>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <p class="text-wrap text-center fs-7 fst-italic mt-2">Laundry (Per Load)</p>
+                                            </div>
+                                          
+                                            <div class="col-4 col-md-3">
+                                              <div class="card text-center selectable-card p-2" onclick="toggleSelect(this)">
+                                                <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                                                  <img src="images/dishes.png" class="card-image" alt="Clean Dishes (1 Sinkful)">
+                                                  <span class="card-text d-none">Clean Dishes (1 Sinkful)</span>
+                                                  <div class="counter-controls mt-2">
+                                                    <button onclick="decrement(event)" class="btn btn-sm btn-outline-secondary text-white">-</button>
+                                                    <span id="counter" class="mx-2 fs-5 fw-bold text-dark">1</span>
+                                                    <button onclick="increment(event)" class="btn btn-sm btn-outline-secondary text-white">+</button>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <p class="text-wrap text-center fs-7 fst-italic mt-2">Clean Dishes (1 Sinkful)</p>
+                                            </div>
+                                          </div>
+                                          
+
+                                          <div class="row gx-2 gy-3">
+                                            <div class="col-4 col-md-3">
+                                              <div class="card text-center selectable-card p-2" onclick="toggleSelect(this)">
+                                                <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                                                  <img src="images/balcony.png" alt="Balcony / Patio" class="card-image" style="width: 50px; object-fit: contain;">
+                                                  <span class="card-text d-none">Balcony / Patio</span>
+                                                  <div class="counter-controls mt-2">
+                                                    <button onclick="decrement(event)" class="btn btn-sm btn-outline-secondary text-white">-</button>
+                                                    <span id="counter" class="mx-2 fs-5 fw-bold text-dark">1</span>
+                                                    <button onclick="increment(event)" class="btn btn-sm btn-outline-secondary text-white">+</button>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <p class="text-wrap text-center fs-7 fst-italic mt-2">Balcony / Patio</p>
+                                            </div>
+                                          
+                                            <div class="col-4 col-md-3">
+                                              <div class="card text-center selectable-card p-2" onclick="toggleSelect(this)">
+                                                <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                                                  <img src="images/organizing.png" alt="30 Minutes of Organizing" class="card-image" style="width: 50px; object-fit: contain;">
+                                                  <span class="card-text d-none">30 Minutes of Organizing</span>
+                                                  <div class="counter-controls mt-2">
+                                                    <button onclick="decrement(event)" class="btn btn-sm btn-outline-secondary text-white">-</button>
+                                                    <span id="counter" class="mx-2 fs-5 fw-bold text-dark">1</span>
+                                                    <button onclick="increment(event)" class="btn btn-sm btn-outline-secondary text-white">+</button>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <p class="text-wrap text-center fs-7 fst-italic mt-2">30 Minutes of Organizing</p>
+                                            </div>
+                                          
+                                            <div class="col-4 col-md-3">
+                                              <div class="card text-center selectable-card p-2" onclick="toggleSelect(this)">
+                                                <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                                                  <img src="images/sweep.png" alt="Sweep Garage" class="card-image" style="width: 50px; object-fit: contain;">
+                                                  <span class="card-text d-none">Sweep Garage</span>
+                                                </div>
+                                              </div>
+                                              <p class="text-wrap text-center fs-7 fst-italic mt-2">Sweep Garage</p>
+                                            </div>
+                                          
+                                            <div class="col-4 col-md-3">
+                                              <div class="card text-center selectable-card p-2" onclick="toggleSelect(this)">
+                                                <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                                                  <img src="images/fan.png" alt="Ceiling Fan" class="card-image" style="width: 50px; object-fit: contain;">
+                                                  <span class="card-text d-none">Ceiling Fan</span>
+                                                  <div class="counter-controls mt-2">
+                                                    <button onclick="decrement(event)" class="btn btn-sm btn-outline-secondary text-white">-</button>
+                                                    <span id="counter" class="mx-2 fs-5 fw-bold text-dark">1</span>
+                                                    <button onclick="increment(event)" class="btn btn-sm btn-outline-secondary text-white">+</button>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <p class="text-wrap text-center fs-7 fst-italic mt-2">Ceiling Fan</p>
+                                            </div>
+                                          
+                                            <div class="col-4 col-md-3">
+                                              <div class="card text-center selectable-card p-2" onclick="toggleSelect(this)">
+                                                <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                                                  <img src="images/eco-friendly.png" alt="Eco-Friendly Cleaning" class="card-image" style="width: 50px; object-fit: contain;">
+                                                  <span class="card-text d-none">Eco-Friendly Cleaning</span>
+                                                </div>
+                                              </div>
+                                              <p class="text-wrap text-center fs-7 fst-italic mt-2">Eco-Friendly Cleaning</p>
+                                            </div>
+                                          </div>
+                                          
                                         </div>
                                     </li>
                                     <!-- Date Section -->
